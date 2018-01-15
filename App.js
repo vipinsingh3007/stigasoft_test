@@ -46,7 +46,7 @@ const StigaSoftStack = StackNavigator({
 export default class App extends React.Component {
   render() {
     return (
-      <Provider store={createStore(reducer)}>
+      <Provider store={ createStore(reducer) }>
         <View style={styles.container}>
           <StigaSoftStack/>
         </View>

@@ -34,8 +34,8 @@ class SimpleToDoList extends React.Component{
   }
 
    render(){
-    // const { data } = this.props.data;
-    const data = [{key:'My todo list item1'}, {key: 'My todo list item2'}]
+    const { data } = this.props;
+    // const data = [{key:'My todo list item1'}, {key: 'My todo list item2'}]
     return (
        <View style={styles.container}>
           <FlatList data={data} renderItem={this.renderItem} />
@@ -45,11 +45,11 @@ class SimpleToDoList extends React.Component{
 }
 
 function mapStateToProps(state,ownProps){
-  const data = {
-    data: {...state},
-    props: {...ownProps}
+  const data = [];
+  for(var i in state){
+    data.push(state[i]);
   }
-  return data;
+  return {data:data};
 }
 
 export default connect(mapStateToProps)(SimpleToDoList)

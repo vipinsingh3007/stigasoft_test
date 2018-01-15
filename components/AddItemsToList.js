@@ -1,13 +1,41 @@
 import React from 'react';
 import { View, StyleSheet, Text,
-          TextInput, TouchableOpacity,KeyboardAvoidingView } from 'react-native';
+          TextInput, TouchableOpacity,
+          KeyboardAvoidingView,Keyboard } from 'react-native';
+import { connect } from 'react-redux';
+import { addItem } from '../actions';
+import { timeToString } from '../utils/helper';
+
+
 
 class AddItemsToList extends React.Component{
+
+  state ={
+    input:null
+  }
 
   static navigationOptions = ({ navigation }) => {
     return {
       title:'Add Items'
     }
+  }
+
+  addItem = () => {
+    const key = timeToString();
+    const item = this.state.input;
+
+    Keyboard.dismiss();
+    if(!this.state.input){
+      alert('Please enter the item');
+      return;
+    }
+
+    this.props.dispatch(addItem({
+      [key]: {'key':item}
+    }));
+
+    this.props.navigation.goBack();
+
   }
 
   render(){
@@ -18,15 +46,19 @@ class AddItemsToList extends React.Component{
       autoCorrect:false,
     }
     return (<KeyboardAvoidingView behavior='padding' style={styles.container}>
-              <TextInput {...textProps} style={styles.input}/>
-              <TouchableOpacity style={styles.button}>
+              <TextInput value={this.state.input} onChangeText={(e)=> this.setState({input:e}) }{...textProps} style={styles.input}/>
+              <TouchableOpacity style={styles.button} onPress={ this.addItem }>
                 <Text style={styles.text}>Add Item</Text>
               </TouchableOpacity>
             </KeyboardAvoidingView>)
   }
 }
 
-export default AddItemsToList;
+function mapStateToProps(state,ownProps){
+  return {
+      ...state
+    };
+}
 
 const styles =  StyleSheet.create({
   container:{
@@ -54,4 +86,6 @@ const styles =  StyleSheet.create({
     color:'white',
     fontSize:21,
   }
-})
+});
+
+export default connect(mapStateToProps)(AddItemsToList);
