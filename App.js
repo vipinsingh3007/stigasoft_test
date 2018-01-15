@@ -38,7 +38,7 @@ const StigaSoftStack = StackNavigator({
     navigationOptions : {
       headerTintColor:'white',
       headerStyle:{
-        backgroundColor:'red',
+        backgroundColor:'#292477',
       },
       headerBackTitle:'Back'
 }})

@@ -30,7 +30,7 @@ class SimpleToDoList extends React.Component{
     return (<View style={styles.listView}>
               <Text style={styles.listText}>{item.title}</Text>
               <TouchableOpacity style={styles.button} onPress={() => this.removeItem(item)}>
-                <Text style={styles.text}>Remove</Text>
+                <Text style={styles.text}>Delete</Text>
               </TouchableOpacity>
              </View>
            );
@@ -41,7 +41,14 @@ class SimpleToDoList extends React.Component{
     // const data = [{key:'My todo list item1'}, {key: 'My todo list item2'}]
     return (
        <View style={styles.container}>
-          <FlatList data={data} renderItem={this.renderItem} ListEmptyComponent={() => <View style={styles.emptyContainer}><Text>Click on Add button to add items</Text></View>}/>
+          <FlatList
+            data={data}
+            renderItem={this.renderItem}
+            ListEmptyComponent={() =>
+              <View style={styles.emptyContainer}>
+              <Text>Click on Add button to add items</Text>
+              </View>}
+            ItemSeparatorComponent={() => <View style={styles.separator}></View>} />
       </View>
      )
    }
@@ -68,15 +75,15 @@ const styles = StyleSheet.create({
     backgroundColor:"#fff"
   },
   listView:{
-    height:60,
-    backgroundColor:"#00008b",
+    height:90,
+    backgroundColor:"white",
     marginBottom:1,
     flexDirection:'row',
     alignItems:'center',
     justifyContent:'space-between'
   },
   listText:{
-    color:'#fff',
+    color:'#000',
     fontSize:21,
     paddingLeft:10,
 
@@ -87,13 +94,12 @@ const styles = StyleSheet.create({
     padding:10
   },
   button:{
+    backgroundColor:'red',
     margin:10,
-    backgroundColor:'white',
-    height:40,
-    borderRadius:9,
+    height:40
   },
   rightButtonContainer:{
-      backgroundColor:'red',
+      backgroundColor:'#292477',
       justifyContent:'center',
       margin:10
   },
@@ -106,5 +112,10 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems:'center',
     backgroundColor:"#fff",
+  },
+  separator:{
+    backgroundColor:'#000',
+    alignItems:'stretch',
+    height:2
   }
 });
