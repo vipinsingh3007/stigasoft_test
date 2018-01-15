@@ -31,7 +31,7 @@ class AddItemsToList extends React.Component{
     }
 
     this.props.dispatch(addItem({
-      [key]: {'key':item}
+      [key]: {title:item,'key':key}
     }));
 
     this.props.navigation.goBack();

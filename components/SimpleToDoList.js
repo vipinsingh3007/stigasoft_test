@@ -1,6 +1,7 @@
 import React from "react";
 import { View,Text,StyleSheet,FlatList,TouchableOpacity } from "react-native";
 import { connect } from 'react-redux';
+import { removeItem } from '../actions';
 
 function RightButton(props){
         return (
@@ -21,12 +22,14 @@ class SimpleToDoList extends React.Component{
     }
   }
 
-
+  removeItem = ({ key }) => {
+    this.props.dispatch(removeItem(key));
+  }
 
   renderItem = ({ item }) => {
     return (<View style={styles.listView}>
-              <Text style={styles.listText}>{item.key}</Text>
-              <TouchableOpacity style={styles.button}>
+              <Text style={styles.listText}>{item.title}</Text>
+              <TouchableOpacity style={styles.button} onPress={() => this.removeItem(item)}>
                 <Text style={styles.text}>Remove</Text>
               </TouchableOpacity>
              </View>
@@ -47,7 +50,9 @@ class SimpleToDoList extends React.Component{
 function mapStateToProps(state,ownProps){
   const data = [];
   for(var i in state){
-    data.push(state[i]);
+    if(state[i]){
+      data.push(state[i]);
+    }
   }
   return {data:data};
 }
