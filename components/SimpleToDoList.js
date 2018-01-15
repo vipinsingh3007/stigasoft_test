@@ -41,7 +41,7 @@ class SimpleToDoList extends React.Component{
     // const data = [{key:'My todo list item1'}, {key: 'My todo list item2'}]
     return (
        <View style={styles.container}>
-          <FlatList data={data} renderItem={this.renderItem} />
+          <FlatList data={data} renderItem={this.renderItem} ListEmptyComponent={() => <View style={styles.emptyContainer}><Text>Click on Add button to add items</Text></View>}/>
       </View>
      )
    }
@@ -100,5 +100,11 @@ const styles = StyleSheet.create({
   rightButtonText:{
     color:'white',
     fontSize:18,
+  },
+  emptyContainer:{
+    flex:1,
+    justifyContent:'center',
+    alignItems:'center',
+    backgroundColor:"#fff",
   }
 });
