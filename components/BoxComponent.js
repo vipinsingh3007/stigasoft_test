@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     height:50,
     width:50,
     margin:10,
-    backgroundColor:'#000'
+    backgroundColor:'#00008b'
   }
 });
 

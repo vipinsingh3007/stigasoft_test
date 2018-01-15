@@ -7,6 +7,10 @@ import RectangleBoxCenter  from './components/RectangleBoxCenter';
 import AutomatedSlider  from './components/AutomatedSlider';
 import LoginScreen  from './components/LoginScreen';
 import SimpleToDoList  from './components/SimpleToDoList';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import reducer from './reducers';
+import AddItemsToList from './components/AddItemsToList';
 
 const StigaSoftStack = StackNavigator({
   Home:{
@@ -26,21 +30,27 @@ const StigaSoftStack = StackNavigator({
   },
   AutomatedSlider:{
     screen:AutomatedSlider
+  },
+  AddItemsToList:{
+    screen:AddItemsToList
   }
 },{
     navigationOptions : {
       headerTintColor:'white',
       headerStyle:{
-      backgroundColor:'red'
-    }
+        backgroundColor:'red',
+      },
+      headerBackTitle:'Back'
 }})
 
 export default class App extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <StigaSoftStack/>
-      </View>
+      <Provider store={createStore(reducer)}>
+        <View style={styles.container}>
+          <StigaSoftStack/>
+        </View>
+      </Provider>
     );
   }
 }
